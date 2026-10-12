@@ -19,7 +19,7 @@ services:
       - calculator
 
   nginx:
-    image: calculator-nginx:local
+    image: ${NGINX_IMAGE:-calculator-nginx:local}
     build:
       context: .
       dockerfile: Dockerfile.nginx

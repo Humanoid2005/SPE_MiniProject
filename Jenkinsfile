@@ -12,16 +12,13 @@ pipeline {
         DOCKER_HOST = 'unix:///home/sriram-srikanth/.docker/desktop/docker.sock'
         COMPOSE_PROJECT_NAME = 'spe_mini_project-1'
         CALCULATOR_IMAGE = "humanoid2005/calculaor-service:${BUILD_NUMBER}"
+        NGINX_IMAGE = "calculator-nginx:${BUILD_NUMBER}"
         NOTIFICATION_EMAIL = 'Sriram.Srikanth@iiitb.ac.in'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                sh '''
-                    docker rm -f $(docker ps -aq --filter "label=com.docker.compose.project=$COMPOSE_PROJECT_NAME") || true
-                    docker rmi $(docker image ls -q --filter "label=com.docker.compose.project=$COMPOSE_PROJECT_NAME") || true
-                '''
                 checkout scm
             }
         }
@@ -46,7 +43,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh "docker build --label 'com.docker.compose.project=$COMPOSE_PROJECT_NAME' -t $CALCULATOR_IMAGE ."
-                sh "docker build --label 'com.docker.compose.project=$COMPOSE_PROJECT_NAME' -f Dockerfile.nginx -t calculator-nginx:local ."
+                sh "docker build --label 'com.docker.compose.project=$COMPOSE_PROJECT_NAME' -f Dockerfile.nginx -t $NGINX_IMAGE ."
             }
         }
 
