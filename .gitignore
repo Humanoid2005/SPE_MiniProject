@@ -31,3 +31,19 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Local credentials and generated evidence
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.log
+docs/evidence/*.json
+docs/evidence/*.txt
+tmp/
+.aws
+.idea
+.agents
+.codex
+.mvn

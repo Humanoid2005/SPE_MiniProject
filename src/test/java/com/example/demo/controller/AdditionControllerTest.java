@@ -30,7 +30,8 @@ class AdditionControllerTest {
                         .param("a", "10.0")
                         .param("b", "20.0"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("30.0"));
+                .andExpect(jsonPath("$.operation").value("add"))
+                .andExpect(jsonPath("$.result").value(30.0));
     }
 
     @Test

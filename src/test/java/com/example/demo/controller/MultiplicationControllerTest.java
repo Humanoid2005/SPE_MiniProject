@@ -30,6 +30,7 @@ class MultiplicationControllerTest {
                         .param("a", "10.0")
                         .param("b", "20.0"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("200.0"));
+                .andExpect(jsonPath("$.operation").value("multiply"))
+                .andExpect(jsonPath("$.result").value(200.0));
     }
 }

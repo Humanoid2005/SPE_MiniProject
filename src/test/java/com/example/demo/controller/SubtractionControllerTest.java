@@ -30,6 +30,7 @@ class SubtractionControllerTest {
                         .param("a", "10.0")
                         .param("b", "20.0"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("-10.0"));
+                .andExpect(jsonPath("$.operation").value("subtract"))
+                .andExpect(jsonPath("$.result").value(-10.0));
     }
 }
