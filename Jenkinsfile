@@ -20,13 +20,13 @@ pipeline {
             }
         }
 
-        stage('Install') {
+        stage('Build') {
             steps {
                 sh './mvnw install -DskipTests'
             }
         }
 
-        stage('Docker Deploy') {
+        stage('Deploy') {
             steps {
                 sh 'docker compose up -d --build'
             }
