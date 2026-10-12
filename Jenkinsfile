@@ -27,7 +27,11 @@ pipeline {
         }
 
         stage('Deploy') {
+            environment {
+                DOCKER_HOST = 'unix:///home/sriram-srikanth/.docker/desktop/docker.sock'
+            }
             steps {
+                sh 'docker info'
                 sh 'docker compose up -d --build'
             }
         }
