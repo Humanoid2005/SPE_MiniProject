@@ -46,6 +46,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh "docker build --label 'com.docker.compose.project=$COMPOSE_PROJECT_NAME' -t $CALCULATOR_IMAGE ."
+                sh "docker build --label 'com.docker.compose.project=$COMPOSE_PROJECT_NAME' -f Dockerfile.nginx -t calculator-nginx:local ."
             }
         }
 
@@ -64,7 +65,6 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'docker compose pull nginx'
                 sh 'docker compose up -d --no-build --pull never --remove-orphans --wait --wait-timeout 180'
                 sh 'curl -fsS http://localhost:8000/actuator/health | grep -q \'"status":"UP"\''
                 sh 'docker compose ps'
