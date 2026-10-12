@@ -11,7 +11,7 @@ pipeline {
     environment {
         DOCKER_HOST = 'unix:///home/sriram-srikanth/.docker/desktop/docker.sock'
         COMPOSE_PROJECT_NAME = 'spe_mini_project-1'
-        CALCULATOR_IMAGE = "humanoid2005/spe-mini-project:${BUILD_NUMBER}"
+        CALCULATOR_IMAGE = "humanoid2005/calculaor-service:${BUILD_NUMBER}"
         NOTIFICATION_EMAIL = 'Sriram.Srikanth@iiitb.ac.in'
     }
 
@@ -64,6 +64,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
+                sh 'docker compose pull nginx'
                 sh 'docker compose up -d --no-build --pull never --remove-orphans --wait --wait-timeout 180'
                 sh 'curl -fsS http://localhost:8000/actuator/health | grep -q \'"status":"UP"\''
                 sh 'docker compose ps'
