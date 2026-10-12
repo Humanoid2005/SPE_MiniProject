@@ -200,32 +200,6 @@ All calculator endpoints accept the required query parameters `a` and `b`.
 | GET | `/api/v1/divide?a=6&b=2` | Division |
 | GET | `/actuator/health` | Application health |
 
-```bash
-curl 'http://localhost:8000/api/v1/add?a=2&b=3'
-curl 'http://localhost:8000/api/v1/subtract?a=6&b=2'
-curl 'http://localhost:8000/api/v1/multiply?a=6&b=2'
-curl 'http://localhost:8000/api/v1/divide?a=6&b=2'
-curl 'http://localhost:8000/actuator/health'
-```
-
-Example successful response:
-
-```json
-{"operation":"add","a":2.0,"b":3.0,"result":5.0}
-```
-
-Example invalid request:
-
-```bash
-curl -i 'http://localhost:8000/api/v1/divide?a=6&b=0'
-```
-
-This returns HTTP 400 with:
-
-```json
-{"error":"BAD_REQUEST","message":"Denominator cannot be 0"}
-```
-
 Actuator returns `{"status":"UP"}` when the configured health checks pass. This response comes from Spring Boot Actuator, not a hardcoded controller. The `/actuator` endpoint lists links to exposed management endpoints. API documentation is also available at `http://localhost:8000/swagger-ui/index.html`.
 
 ## Jenkins configuration
