@@ -1,6 +1,15 @@
-# Exclude everything
-**
-
-# Include the directory and application JAR
-!target/
+.git
+.idea
+.agents
+.aws
+.codex
+target/*
 !target/*.jar
+docs
+output
+scripts
+*.docx
+.env
+.env.*
+!.env.example
+*.log

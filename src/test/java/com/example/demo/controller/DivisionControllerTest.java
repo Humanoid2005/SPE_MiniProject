@@ -30,7 +30,8 @@ class DivisionControllerTest {
                         .param("a", "10.0")
                         .param("b", "2.0"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("5.0"));
+                .andExpect(jsonPath("$.operation").value("divide"))
+                .andExpect(jsonPath("$.result").value(5.0));
     }
 
     @Test
@@ -42,6 +43,7 @@ class DivisionControllerTest {
                         .param("a", "10.0")
                         .param("b", "0.0"))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("Denominator cannot be 0"));
+                .andExpect(jsonPath("$.error").value("BAD_REQUEST"))
+                .andExpect(jsonPath("$.message").value("Denominator cannot be 0"));
     }
 }
