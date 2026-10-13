@@ -209,7 +209,7 @@ The Jenkins agent needs Java 21, Maven, Git, Docker, Docker Compose, `curl`, and
 1. Configure the pipeline job to load `Jenkinsfile` from the repository's deployment branch.
 2. Enable the GitHub webhook trigger in the job and configure the repository webhook to reach Jenkins' `/github-webhook/` endpoint. If using a tunnel, use its public URL.
 3. Store the Docker Hub username and access token as a **Username with password** credential. The Push stage references its credential ID through `withCredentials`.
-4. Configure **Extended E-mail Notification** in Jenkins system settings with Gmail SMTP, port 587, TLS, and the saved Gmail username/app-password credential. The current `emailext` call uses these global SMTP settings.
+4. Configure **Extended E-mail Notification** in Jenkins system settings with Gmail SMTP, port 465, SSL, and the saved Gmail username/app-password credential. The current `emailext` call uses these global SMTP settings.
 5. Ensure the agent can reach the Docker daemon. This installation sets `DOCKER_HOST` to `unix:///home/sriram-srikanth/.docker/desktop/docker.sock`; update it when using a different machine or Docker installation.
 
 Jenkins builds and deploys on the same Docker daemon. Only the calculator image is pushed to Docker Hub; the locally built Nginx image must remain available for deployment. Tokens and app passwords stay in Jenkins Credentials and are not hardcoded in the repository.
